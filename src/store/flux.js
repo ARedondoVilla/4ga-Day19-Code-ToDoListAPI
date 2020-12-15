@@ -3,17 +3,18 @@ export default function({ getStore, getActions, setStore }) {
         store: {
             loading: false,
             todos: [],
+            text: null,
             user: "ARedondoVilla",
             test: [{"label": "Tarea 1", "done": true}, {"label": "Tarea 2", "done": true}, {"label": "Tarea 3", "done": true}]
         },
         actions: {
-            setLoading(status) {
-                setStore({loading: status})
-            },
-            toggleLoader() {
-                const store = getStore()
-                setStore({loading: !store.loading})
-            },
+            // setLoading(status) {
+            //     setStore({loading: status})
+            // },
+            // toggleLoader() {
+            //     const store = getStore()
+            //     setStore({loading: !store.loading})
+            //},
             getToDoList() {
                 const store = getStore()
                 const endpoint = "https://assets.breatheco.de/apis/fake/todos/user/ARedondoVilla";
@@ -26,6 +27,20 @@ export default function({ getStore, getActions, setStore }) {
                     setStore({ todos: json})
                     console.log(store.todos);
                 })
+            },
+            setToDoList() {
+                const store = getStore();
+                const endpoint = "https://assets.breatheco.de/apis/fake/todos/user/ARedondoVilla";
+                const config = {
+                    method: "PUT"
+                }
+            },
+            addLabel(item) {
+                const store = getStore();
+                store.todos.push({"label": item, "done": false})
+                setStore()
+                console.log("AddLabel");
+                console.log(store.todos);
             }
 
         }
