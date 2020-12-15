@@ -3,7 +3,8 @@ export default function({ getStore, getActions, setStore }) {
         store: {
             loading: false,
             todos: [],
-            user: "ARedondoVilla"
+            user: "ARedondoVilla",
+            test: [{"label": "Tarea 1", "done": true}, {"label": "Tarea 2", "done": true}, {"label": "Tarea 3", "done": true}]
         },
         actions: {
             setLoading(status) {
