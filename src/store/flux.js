@@ -25,24 +25,28 @@ export default function({ getStore, getActions, setStore }) {
                     return response.json()
                 }).then((json) => {
                     setStore({ todos: json})
+                    store.todos.map((value, index) => {
+                        value["id"] = Math.random() // insertar un id a cada uno de los objetos del array
+                    })
+                    setStore()
+
                     console.log(store.todos);
                 })
             },
-            setToDoList() {
-                const store = getStore();
-                const endpoint = "https://assets.breatheco.de/apis/fake/todos/user/ARedondoVilla";
-                const config = {
-                    method: "PUT"
-                }
-            },
+            // setToDoList() {
+            //     const store = getStore();
+            //     const endpoint = "https://assets.breatheco.de/apis/fake/todos/user/ARedondoVilla";
+            //     const config = {
+            //         method: "PUT"
+            //     }
+            // },
             addLabel(item) {
                 const store = getStore();
-                store.todos.push({"label": item, "done": false})
+                store.todos.push({"label": item, "done": false, "id": Math.random()})
                 setStore()
                 console.log("AddLabel");
                 console.log(store.todos);
-            }
-
+            },
         }
     }
 }

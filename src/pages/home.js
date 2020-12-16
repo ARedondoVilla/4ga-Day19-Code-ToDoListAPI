@@ -12,9 +12,9 @@ export default function(props) {
         actions.getToDoList()
     }, [])
 
-    function insertLabel(event) {  // sin este evento el valor del input no cambia con la entrada por teclado, siempre es task = ""
-        setTask(event.target.value);
-    }
+    // function insertLabel(event) {  // sin este evento el valor del input no cambia con la entrada por teclado, siempre es task = ""
+    //     setTask(event.target.value);
+    // }
 
     function eventAddLabel(event) {
         if (task == "") {
@@ -37,7 +37,7 @@ export default function(props) {
                 </div>
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item">
-                        <input className="form-control form-control-lg" type="text" placeholder="New Task" value={task} onChange={insertLabel} onKeyPress={eventAddLabel}></input>
+                        <input className="form-control form-control-lg" type="text" placeholder="New Task" value={task} onChange={(event) => setTask(event.target.value)} onKeyPress={eventAddLabel}></input>
                     </li>
                     {store.todos.map((item, index) => {  
                         return (
