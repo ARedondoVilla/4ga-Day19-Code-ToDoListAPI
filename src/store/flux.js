@@ -17,13 +17,14 @@ export default function({ getStore, getActions, setStore }) {
             //},
             getToDoList() {
                 const store = getStore()
-                const endpoint = "https://assets.breatheco.de/apis/fake/todos/user/ARedondoVilla";
+                const endpoint = 'https://assets.breatheco.de/apis/fake/todos/user/ARedondoVilla';
                 const config = {
                     method: "GET"
                 }
                 fetch(endpoint, config).then((response) => {
                     return response.json()
                 }).then((json) => {
+
                     setStore({ todos: json})
                     store.todos.map((value, index) => {
                         value["id"] = Math.random() // insertar un id a cada uno de los objetos del array
@@ -33,19 +34,28 @@ export default function({ getStore, getActions, setStore }) {
                     console.log(store.todos);
                 })
             },
-            // setToDoList() {
-            //     const store = getStore();
-            //     const endpoint = "https://assets.breatheco.de/apis/fake/todos/user/ARedondoVilla";
-            //     const config = {
-            //         method: "PUT"
-            //     }
-            // },
+            setToDoList(data) {
+                const store = getStore();
+                const endpoint = "https://assets.breatheco.de/apis/fake/todos/user/ARedondoVilla";
+                const config = {
+					method: "PUT",
+					body: JSON.stringify(data),
+					headers: {
+						"Content-Type": "application/json"
+                    }
+                }
+                fetch(endpoint, config)
+                getActions().getToDoList()
+            },
             addLabel(item) {
                 const store = getStore();
-                store.todos.push({"label": item, "done": false, "id": Math.random()})
-                setStore()
+                const newList = [...store.todos]
+                newList.push({"label": item, "done": false, "id": Math.random()})
+                setStore({todos: newList})
                 console.log("AddLabel");
+                getActions().setToDoList(store.todos)
                 console.log(store.todos);
+                
             },
         }
     }

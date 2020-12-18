@@ -7,10 +7,7 @@ export default function(props) {
     const { store, actions } = useContext(Context);
     const [ task, setTask ] = useState("");
 
-    useEffect(() => {
-        console.log("getToDoList");
-        actions.getToDoList()
-    }, [])
+    
 
     // function insertLabel(event) {  // sin este evento el valor del input no cambia con la entrada por teclado, siempre es task = ""
     //     setTask(event.target.value);
