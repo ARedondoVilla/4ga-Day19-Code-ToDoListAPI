@@ -6,6 +6,7 @@ export default function({ getStore, getActions, setStore }) {
             text: null,
             user: "ARedondoVilla",
             test: [{"label": "Tarea 1", "done": true}, {"label": "Tarea 2", "done": true}, {"label": "Tarea 3", "done": true}]
+            
         },
         actions: {
             // setLoading(status) {
@@ -27,7 +28,7 @@ export default function({ getStore, getActions, setStore }) {
 
                     setStore({ todos: json})
                     store.todos.map((value, index) => {
-                        value["id"] = Math.random() // insertar un id a cada uno de los objetos del array
+                        value["id"] = (Math.floor(Math.random() * 100000) + 1) // insertar un id a cada uno de los objetos del array
                     })
                     setStore()
 
@@ -45,18 +46,25 @@ export default function({ getStore, getActions, setStore }) {
                     }
                 }
                 fetch(endpoint, config)
-                getActions().getToDoList()
+                
             },
             addLabel(item) {
                 const store = getStore();
                 const newList = [...store.todos]
-                newList.push({"label": item, "done": false, "id": Math.random()})
+                newList.push({"label": item, "done": false, "id": (Math.floor(Math.random() * 100000) + 1)})
                 setStore({todos: newList})
                 console.log("AddLabel");
-                getActions().setToDoList(store.todos)
+                // getActions().setToDoList(store.todos)
                 console.log(store.todos);
                 
             },
+            deleteLabel(value) {
+                const store = getStore()
+                const newList = store.todos.filter((item, index) => {
+                    return (value != item.id)
+                })
+                setStore({ todos: newList})
+            }
         }
     }
 }

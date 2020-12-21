@@ -8,16 +8,21 @@ export default function(props) {
     const [ task, setTask ] = useState("");
 
     
+    useEffect(() => {
+        actions.setToDoList(store.todos)
+        console.log("Cambia lista todos");
+        console.log(Math.floor(Math.random() * 100000) + 1);
+        
+    }, [store.todos])
 
-    // function insertLabel(event) {  // sin este evento el valor del input no cambia con la entrada por teclado, siempre es task = ""
-    //     setTask(event.target.value);
-    // }
+    useEffect(() => {
+        actions.getToDoList()
+    }, [])
 
     function eventAddLabel(event) {
         if (task == "") {
             return
         }
-      
         if (event.key === "Enter") {
             actions.addLabel(task);
             setTask("")
@@ -40,7 +45,7 @@ export default function(props) {
                         return (
                         <li className="list-group-item" key={index}>
                             {item.label} 
-                            <button  type="button" className="close" aria-label="Close">
+                            <button  type="button" className="close" aria-label="Close" onClick={(event) => actions.deleteLabel(item.id)}>
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </li>
