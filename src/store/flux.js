@@ -13,7 +13,6 @@ export default function({ getStore, getActions, setStore }) {
                 fetch(endpoint, config).then((response) => {
                     return response.json()
                 }).then((json) => {
-
                     setStore({ todos: json})
                     store.todos.map((value, index) => {
                         value["id"] = (Math.floor(Math.random() * 100000) + 1)
