@@ -1,21 +1,9 @@
 export default function({ getStore, getActions, setStore }) {
     return {
         store: {
-            loading: false,
-            todos: [],
-            text: null,
-            user: "ARedondoVilla",
-            test: [{"label": "Tarea 1", "done": true}, {"label": "Tarea 2", "done": true}, {"label": "Tarea 3", "done": true}]
-            
+            todos: []            
         },
         actions: {
-            // setLoading(status) {
-            //     setStore({loading: status})
-            // },
-            // toggleLoader() {
-            //     const store = getStore()
-            //     setStore({loading: !store.loading})
-            //},
             getToDoList() {
                 const store = getStore()
                 const endpoint = 'https://assets.breatheco.de/apis/fake/todos/user/ARedondoVilla';
@@ -28,11 +16,9 @@ export default function({ getStore, getActions, setStore }) {
 
                     setStore({ todos: json})
                     store.todos.map((value, index) => {
-                        value["id"] = (Math.floor(Math.random() * 100000) + 1) // insertar un id a cada uno de los objetos del array
+                        value["id"] = (Math.floor(Math.random() * 100000) + 1)
                     })
                     setStore()
-
-                    console.log(store.todos);
                 })
             },
             setToDoList(data) {
@@ -52,11 +38,7 @@ export default function({ getStore, getActions, setStore }) {
                 const store = getStore();
                 const newList = [...store.todos]
                 newList.push({"label": item, "done": false, "id": (Math.floor(Math.random() * 100000) + 1)})
-                setStore({todos: newList})
-                console.log("AddLabel");
-                // getActions().setToDoList(store.todos)
-                console.log(store.todos);
-                
+                setStore({todos: newList})  
             },
             deleteLabel(value) {
                 const store = getStore()

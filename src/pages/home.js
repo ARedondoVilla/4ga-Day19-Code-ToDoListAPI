@@ -10,9 +10,6 @@ export default function(props) {
     
     useEffect(() => {
         actions.setToDoList(store.todos)
-        console.log("Cambia lista todos");
-        console.log(Math.floor(Math.random() * 100000) + 1);
-        
     }, [store.todos])
 
     useEffect(() => {
@@ -26,8 +23,6 @@ export default function(props) {
         if (event.key === "Enter") {
             actions.addLabel(task);
             setTask("")
-            //setTask("Cambia")
-            //console.log(task);
         }
     }
 
@@ -35,7 +30,7 @@ export default function(props) {
         <div className="container">
             <div className="card mt-4">
                 <div className="card-header text-center" id="title-card">
-                    <h1>To Do List</h1>
+                    <h1>To Do List with API Rest</h1>
                 </div>
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item">
